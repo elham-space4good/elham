@@ -1,0 +1,34 @@
+from osgeo import gdal, gdalconst, ogr
+import os
+from osgeo import gdal_array as gdarr
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib
+import shapefile
+import rasterio as rio
+from rasterio.plot import show
+from rasterio.mask import mask
+from shapely.geometry import mapping
+import matplotlib.pyplot as plt
+import geopandas as gpd
+import earthpy as et
+import earthpy.plot as ep
+import earthpy.spatial as es
+import cartopy as cp
+
+#Open Raster Files
+
+raster_data = "/home/ubuntu/Space4Good/MachineLearningModel/S1_images/subset_test_20201004_Asm_Orb_Cal_Spk_TC_Cnv.tif"
+# open the image
+with rio.open(raster_data) as src:
+    raster_data_im = src.read(masked=True)[0]
+    extent = rio.plot.plotting_extent(src)
+    raster_profile = src.profile
+
+ep.plot_bands(raster_data_im,
+               cmap='terrain',
+               extent=extent,
+               title="Stack",
+               cbar=False);
+               
+type(raster_data)
